@@ -3,7 +3,9 @@
 <head>
     <title>PokeAPI by Ty Nadalini</title>
     <link rel="stylesheet" href="PokeAPICSS.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="PokeAPIFunctions.js"></script>
+
 </head>
 
 <body>
@@ -50,15 +52,17 @@
         <label for="pokemon">Enter your desired Pokemon below: </label>
         <br>
         <input type="text" id="pokemon" name="pokemon" size="35" placeholder="1 or bulbasaur">
+
+        <br>
+        <br>
+
+        <input type="button" onclick="setPokemonURL()" value="Pokemon Search!">
+        <a href="https://pokeapi.co/docs/v2" target="_blank">PokeAPIv2 Link</a>
+
+        <br>
+
+        <a href="PokeBattleSim.html" target="_blank">PokeMon Battle Simulator!</a>
     </form>
-    <br>
-
-
-    <!--buttons for user interaction and getting data from PokeAPI-->
-    <button onclick="getJoke()">Pokemon Search!</button>
-    <a href="https://pokeapi.co/docs/v2" target="_blank">PokeAPIv2 Link</a>
-    <br>
-    <a href="PokeBattleSim.html" target="_blank">PokeMon Battle Simulator!</a>
 </body>
 
 </html>
