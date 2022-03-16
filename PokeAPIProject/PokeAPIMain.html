@@ -1,11 +1,64 @@
 ﻿<!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <title>PokeAPI by Ty Nadalini</title>
+    <link rel="stylesheet" href="PokeAPICSS.css">
+    <script src="PokeAPIFunctions.js"></script>
 </head>
-<body>
 
+<body>
+    <h1>PokeAPI PokeDex</h1>
+    <!--table displaying generation data for pokemon games-->
+    <h3>Generation list:</h3>
+    <table>
+        <tr>
+            <td>Generation Number</td>
+            <td>Game Titles</td>
+        </tr>
+        <tr>
+            <td>1 - First Gen</td>
+            <td>Pokemon Red, Pokemon Blue, Pokemon Green, Pokemon Yellow</td>
+        </tr>
+        <tr>
+            <td>2 - Second Gen</td>
+            <td>Pokemon Gold and Silver, Pokemon Crystal</td>
+        </tr>
+        <tr>
+            <td>3 - Third Gen</td>
+            <td>Pokemon Ruby and Sappire, Pokemon FireRed and LeafGreen, Pokemon Emerald</td>
+        </tr>
+        <tr>
+            <td>4 - Fourth Gen</td>
+            <td>Pokemon Diamond and Pearl, Pokemon Platinum, Pokemon HeartGold and SoulSilver</td>
+        </tr>
+    </table>
+
+    <p>***Please note! If a generation is not specified, Generation 1 will be automatically searched.***</p>
+    <!--form for getting generation selection from user-->
+    <form id="pokeform">
+        <label for="gen">Please select a generation: </label>
+        <select name="gen" id="gen">
+            <option value="default" selected>--Please Select--</option>
+            <option value="gen1">Gen 1</option>
+            <option value="gen2">Gen 2</option>
+            <option value="gen3">Gen 3</option>
+            <option value="gen4">Gen 4</option>
+        </select>
+        <br>
+        <br>
+        <br>
+        <label for="pokemon">Enter your desired Pokemon below: </label>
+        <br>
+        <input type="text" id="pokemon" name="pokemon" size="35" placeholder="1 or bulbasaur">
+    </form>
+    <br>
+
+
+    <!--buttons for user interaction and getting data from PokeAPI-->
+    <button onclick="getJoke()">Pokemon Search!</button>
+    <a href="https://pokeapi.co/docs/v2" target="_blank">PokeAPIv2 Link</a>
+    <br>
+    <a href="PokeBattleSim.html" target="_blank">PokeMon Battle Simulator!</a>
 </body>
+
 </html>
