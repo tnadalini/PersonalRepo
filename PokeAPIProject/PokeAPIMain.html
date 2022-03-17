@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <title>PokeAPI by Ty Nadalini</title>
+    <!--imports for corresponding CSS and JS files + axios import for JS functionality-->
     <link rel="stylesheet" href="PokeAPICSS.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="PokeAPIFunctions.js"></script>
@@ -36,7 +37,8 @@
     </table>
 
     <p>***Please note! If a generation is not specified, Generation 1 will be automatically searched.***</p>
-    <!--form for getting generation selection from user-->
+
+    <!--form for getting generation selection and desired pokemon from user-->
     <form id="pokeform">
         <label for="gen">Please select a generation: </label>
         <select name="gen" id="gen">
@@ -56,7 +58,7 @@
         <br>
         <br>
 
-        <input type="button" onclick="setPokemonURL()" value="Pokemon Search!">
+        <input type="button" onclick="getPokeData()" value="Pokemon Search!">
         <a href="https://pokeapi.co/docs/v2" target="_blank">PokeAPIv2 Link</a>
 
         <br>
