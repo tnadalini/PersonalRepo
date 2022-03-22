@@ -1,8 +1,12 @@
 function getPokeData() {
+
     //call helper method to get specified URL for API searching
     const daURL = setPokemonURL();
 
-    //axios call using the made URL
+    var limits = checkPokeGen();
+
+
+    //axios call using the URL created in setPokemonURL()
     axios(
     {
         method: 'get',
@@ -10,17 +14,73 @@ function getPokeData() {
     }
     )
     .then(function (response) {
-        var id = response.data.id;
-        var name = response.data.name;
+        var id = response.data.id; //ID number of the pokemon
+
+        //if the pokemon ID is out of the limit range, exit early and alert the user of the error.
+        if (id < limits[0] || id > limits[1]) {
+            alert("Your Pokemon is outside the selected generation!");
+            return;
+        }
+
+        var name = response.data.name; //name of the pokemon
         let types = response.data.types.map(pokemon => {
             return pokemon.type.name;
         });
-        types = types.join("/");
-        var sprite = response.data.sprites.front_default;
-        //alert(name + "," + id + "," + types + "," + sprite);
-        var resultString = "<p>" + name + "," + id + "," + types + "," + sprite + "</p>";
-        //return resultString;
-        document.write(resultString);
+        types = types.join("/"); //if the pokemon has multiple typings, join with a "/"
+
+        var sprite = response.data.sprites.front_default; //link the to sprite image
+        var height = response.data.height; //height of pokemon
+        var weight = response.data.weight; //weight of pokemon
+
+
+        //write the data back to the original html page
+
+        //create tags first
+        const tagP1 = document.createElement("p");
+        const tagP2 = document.createElement("p");
+        const tagP3 = document.createElement("p");
+        //const tagP4 = document.createElement("p");
+        const tagP5 = document.createElement("p");
+        const tagP6 = document.createElement("p");
+
+        const tagBR = document.createElement("br");
+        const tagImg = document.createElement("img");
+
+        var outDiv = document.getElementById("output");
+
+        //clear out the output div
+        outDiv.innerHTML = "";
+
+        //use the created tags to add output to the original HTML page
+        tagP1.innerHTML = "Pokemon Name: " + name;
+        outDiv.appendChild(tagP1);
+
+        outDiv.appendChild(tagBR);
+
+        tagP2.innerHTML = "Pokemon ID: " + id;
+        outDiv.appendChild(tagP2);
+
+        outDiv.appendChild(tagBR);
+
+        tagP3.innerHTML = "Pokemon Type(s): " + types;
+        outDiv.appendChild(tagP3);
+
+        outDiv.appendChild(tagBR);
+
+        tagImg.src = sprite;
+        outDiv.appendChild(tagImg);
+
+        outDiv.appendChild(tagBR);
+
+        tagP5.innerHTML = "Height: " + height + " decimetres";
+        outDiv.appendChild(tagP5);
+
+        tagP6.innerHTML = "Weight: " + weight + " hectograms";
+        outDiv.appendChild(tagP6);
+
+/*        tagP4.innerHTML = "ResultString: " + resultString;
+        outDiv.appendChild(tagP4);*/
+
     }
     )
     .catch(function (error) {
@@ -28,12 +88,53 @@ function getPokeData() {
         alert("Error during AXIOS call! Please make sure you ensure your input was valid");
     })
 
-}
+} //end getPokeData
 
-//helper function for getPokeData
+
+
+//helper function for getPokeData; sets up the proper URL for axios call
 function setPokemonURL() {
     const input = new String(document.getElementById("pokemon").value);
     const url = "https://pokeapi.co/api/v2/pokemon/".concat(input.trim(), "/");
 
     return url;
-}
+} //end setPokemonURL
+
+
+
+//helper function for getPokeData; validates generation data from user
+function checkPokeGen() {
+    var limits = new Array();
+    switch (document.getElementById("gen").value) {
+        case "none":
+            limits[0] = 1;
+            limits[1] = 721;
+            break;
+        case "gen1":
+            limits[0] = 1;
+            limits[1] = 151;
+            break;
+        case "gen2":
+            limits[0] = 152;
+            limits[1] = 251;
+            break;
+        case "gen3":
+            limits[0] = 252;
+            limits[1] = 386;
+            break;
+        case "gen4":
+            limits[0] = 387;
+            limits[1] = 493;
+            break;
+        case "gen5":
+            limits[0] = 494;
+            limits[1] = 649;
+            break;
+        case "gen6":
+            limits[0] = 650;
+            limits[1] = 721;
+            break;
+    }
+
+    return limits;
+} //end checkPokeGen
