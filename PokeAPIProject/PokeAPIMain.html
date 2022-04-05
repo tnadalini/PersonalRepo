@@ -13,7 +13,7 @@
 
 </head>
 
-<body>
+<body onload="getDefaultPokeData()">
     <div class="container">
         <div id="head">
             <h1>PokeDex</h1>
@@ -22,13 +22,11 @@
 
         <!--table displaying generation data for pokemon games-->
         <div id="table">
-            <h3>Generation list:</h3>
             <table>
                 <tr>
                     <td>Generation Number</td>
                     <td>Game Titles</td>
                     <td>Gen Limits (IDs)</td>
-
                 </tr>
                 <tr>
                     <td>1 - First Gen</td>
@@ -61,45 +59,45 @@
                     <td>650 - 721</td>
                 </tr>
             </table>
-            <div id="form">
+        </div>
+        <div id="form">
 
-                <p>*Please note! If a generation is not specified, all generations will be automatically searched.*</p>
-
-                <!--form for getting generation selection and desired pokemon from user-->
-                <form id="pokeform">
-                    <label for="gen">Please select a generation: </label>
-                    <select name="gen" id="gen">
-                        <option value="none" selected>--Please Select--</option>
-                        <option value="gen1">Gen 1</option>
-                        <option value="gen2">Gen 2</option>
-                        <option value="gen3">Gen 3</option>
-                        <option value="gen4">Gen 4</option>
-                        <option value="gen5">Gen 5</option>
-                        <option value="gen6">Gen 6</option>
-                    </select>
-                    <br>
-                    <br>
-                    <label for="pokemon">Enter your desired Pokemon below: </label>
-                    <br>
-                    <input type="text" id="pokemon" name="pokemon" size="35" placeholder="ex. 1 or bulbasaur">
-                    <br>
-                </form>
-            </div>
-
-            <div id="buttons">
-                <br>
-                <input type="button" onclick="getPokeData()" value="Pokemon Search!">
-                <!-- <a href="https://pokeapi.co/docs/v2" target="_blank">PokeAPIv2 Link</a>
-
+            <!--form for getting generation selection and desired pokemon from user-->
+            <form id="pokeform">
                 <br>
 
-                <a href="PokeBattleSim.html" target="_blank">PokeMon Battle Simulator!</a> -->
-            </div>
-            <div id="output">
-            </div>
+                <label for="gen">Please select a generation: </label>
+                <select name="gen" id="gen">
+                    <option value="none" selected>--Please Select--</option>
+                    <option value="gen1">Gen 1</option>
+                    <option value="gen2">Gen 2</option>
+                    <option value="gen3">Gen 3</option>
+                    <option value="gen4">Gen 4</option>
+                    <option value="gen5">Gen 5</option>
+                    <option value="gen6">Gen 6</option>
+                </select>
+                <br>
+                <br>
+                <br>
+                <label for="pokemon">Enter your desired Pokemon below: </label>
+                <br>
+                <input type="text" id="pokemon" name="pokemon" size="35" placeholder="ex. 1 or bulbasaur">
+                <br>
 
+            </form>
         </div>
 
+        <div id="buttons">
+            <input type="button" onclick="getPokeData()" value="Pokemon Search!">
+            <!-- <a href="https://pokeapi.co/docs/v2" target="_blank">PokeAPIv2 Link</a>
+
+            <br>
+
+            <a href="PokeBattleSim.html" target="_blank">PokeMon Battle Simulator!</a> -->
+        </div>
+        <div id="output">
+
+        </div>
     </div>
 </body>
 

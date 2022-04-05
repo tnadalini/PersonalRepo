@@ -138,3 +138,87 @@ function checkPokeGen() {
 
     return limits;
 } //end checkPokeGen
+
+
+//*****************************************************************************************
+//*              Method for getting default data on initial page load/reload              *
+//*              98% copy of the existing getPokeData() method                            *
+//*****************************************************************************************
+
+function getDefaultPokeData() {
+    axios(
+        {
+            method: 'get',
+            url: "https://pokeapi.co/api/v2/pokemon/pikachu/"
+        }
+    )
+        .then(function (response) {
+            var id = response.data.id; //ID number of the pokemon
+
+            var name = response.data.name; //name of the pokemon
+            let types = response.data.types.map(pokemon => {
+                return pokemon.type.name;
+            });
+            types = types.join("/"); //if the pokemon has multiple typings, join with a "/"
+
+            var sprite = response.data.sprites.front_default; //link the to sprite image
+            var height = response.data.height; //height of pokemon
+            var weight = response.data.weight; //weight of pokemon
+
+
+            //write the data back to the original html page
+
+            //create tags first
+            const tagP1 = document.createElement("p");
+            const tagP2 = document.createElement("p");
+            const tagP3 = document.createElement("p");
+            //const tagP4 = document.createElement("p");
+            const tagP5 = document.createElement("p");
+            const tagP6 = document.createElement("p");
+
+            const tagBR = document.createElement("br");
+            const tagImg = document.createElement("img");
+
+            var outDiv = document.getElementById("output");
+
+            //clear out the output div
+            outDiv.innerHTML = "";
+
+            //use the created tags to add output to the original HTML page
+            tagP1.innerHTML = "Pokemon Name: " + name;
+            outDiv.appendChild(tagP1);
+
+            outDiv.appendChild(tagBR);
+
+            tagP2.innerHTML = "Pokemon ID: " + id;
+            outDiv.appendChild(tagP2);
+
+            outDiv.appendChild(tagBR);
+
+            tagP3.innerHTML = "Pokemon Type(s): " + types;
+            outDiv.appendChild(tagP3);
+
+            outDiv.appendChild(tagBR);
+
+            tagImg.src = sprite;
+            outDiv.appendChild(tagImg);
+
+            outDiv.appendChild(tagBR);
+
+            tagP5.innerHTML = "Height: " + height + " decimetres";
+            outDiv.appendChild(tagP5);
+
+            tagP6.innerHTML = "Weight: " + weight + " hectograms";
+            outDiv.appendChild(tagP6);
+
+            /*        tagP4.innerHTML = "ResultString: " + resultString;
+                    outDiv.appendChild(tagP4);*/
+
+        }
+        )
+        .catch(function (error) {
+            console.log("Error during AXIOS call! Please try again later.");
+            alert("Error during AXIOS call! Please make sure you ensure your input was valid");
+        })
+
+} //end getDefaultPokeData
