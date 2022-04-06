@@ -28,14 +28,23 @@ function getPokeData() {
         });
         types = types.join("/"); //if the pokemon has multiple typings, join with a "/"
 
-        //testing trying to pull move data
-        var moveData;
+        //pull move data and output first 4 moves available 
         let moves = response.data.moves.map(pokeMoves => {
-            moveData = pokeMoves.move.name;
-            return moveData;
+            return pokeMoves.move.name;
         });
-        moves = moves.join(" / ");
-        alert(moves);
+        moves = moves.join("|");
+        var moveList = moves.split("|");
+        moves = "";
+        for (let i = 0; i < 4; i++) {
+            if (i != 3) {
+                moves += moveList[i] + " | ";
+            }
+            else {
+                moves += moveList[i];
+            }
+        }
+
+        //alert(moveList[0] + " | " + moveList[1]);
 
         var sprite = response.data.sprites.front_default; //link the to sprite image
         var height = response.data.height; //height of pokemon
@@ -48,7 +57,7 @@ function getPokeData() {
         const tagP1 = document.createElement("p");
         const tagP2 = document.createElement("p");
         const tagP3 = document.createElement("p");
-        //const tagP4 = document.createElement("p");
+        const tagP4 = document.createElement("p");
         const tagP5 = document.createElement("p");
         const tagP6 = document.createElement("p");
 
@@ -87,8 +96,9 @@ function getPokeData() {
         tagP6.innerHTML = "Weight: " + weight + " hectograms";
         outDiv.appendChild(tagP6);
 
-/*        tagP4.innerHTML = "ResultString: " + resultString;
-        outDiv.appendChild(tagP4);*/
+        //add in the moves to output
+        tagP4.innerHTML = "Moves: " + moves;
+        outDiv.appendChild(tagP4);
 
     }
     )
@@ -96,7 +106,7 @@ function getPokeData() {
         console.log("Error during AXIOS call! Please try again later.");
         alert("Error during AXIOS call! Please make sure you ensure your input was valid");
     })
-
+    
 } //end getPokeData
 
 
@@ -170,6 +180,23 @@ function getDefaultPokeData() {
             });
             types = types.join("/"); //if the pokemon has multiple typings, join with a "/"
 
+            //pull move data and output first 4 moves available 
+            let moves = response.data.moves.map(pokeMoves => {
+                return pokeMoves.move.name;
+            });
+            moves = moves.join("|");
+            var moveList = moves.split("|");
+            moves = "";
+            for (let i = 0; i < 4; i++) {
+                if (i != 3) {
+                    moves += moveList[i] + " | ";
+                }
+                else {
+                    moves += moveList[i];
+                }
+            }
+            //alert(moves);
+
             var sprite = response.data.sprites.front_default; //link the to sprite image
             var height = response.data.height; //height of pokemon
             var weight = response.data.weight; //weight of pokemon
@@ -181,7 +208,7 @@ function getDefaultPokeData() {
             const tagP1 = document.createElement("p");
             const tagP2 = document.createElement("p");
             const tagP3 = document.createElement("p");
-            //const tagP4 = document.createElement("p");
+            const tagP4 = document.createElement("p");
             const tagP5 = document.createElement("p");
             const tagP6 = document.createElement("p");
 
@@ -220,8 +247,8 @@ function getDefaultPokeData() {
             tagP6.innerHTML = "Weight: " + weight + " hectograms";
             outDiv.appendChild(tagP6);
 
-            /*        tagP4.innerHTML = "ResultString: " + resultString;
-                    outDiv.appendChild(tagP4);*/
+            tagP4.innerHTML = "Moves: " + moves;
+            outDiv.appendChild(tagP4);
 
         }
         )
