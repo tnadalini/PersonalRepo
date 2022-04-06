@@ -54,52 +54,53 @@ function getPokeData() {
         //write the data back to the original html page
 
         //create tags first
-        const tagP1 = document.createElement("p");
-        const tagP2 = document.createElement("p");
-        const tagP3 = document.createElement("p");
-        const tagP4 = document.createElement("p");
-        const tagP5 = document.createElement("p");
-        const tagP6 = document.createElement("p");
+        const tagP1 = document.createElement("p"); //name
+        const tagP2 = document.createElement("p"); //id
+        const tagP3 = document.createElement("p"); //type(s)
+        const tagP4 = document.createElement("p"); //moves
+        const tagP5 = document.createElement("p"); //info
+        const tagImg = document.createElement("img"); //sprite
 
-        const tagBR = document.createElement("br");
-        const tagImg = document.createElement("img");
+        //get every output div
+        var nameDiv = document.getElementById("outName");
+        var idDiv = document.getElementById("outID");
+        var typeDiv = document.getElementById("outType");
+        var spriteDiv = document.getElementById("outSprite");
+        var moveDiv = document.getElementById("outMoves");
+        var dataDiv = document.getElementById("outData")
 
-        var outDiv = document.getElementById("output");
-
-        //clear out the output div
-        outDiv.innerHTML = "";
+        //clear out the output divs
+        nameDiv.innerHTML = "";
+        idDiv.innerHTML = "";
+        typeDiv.innerHTML = "";
+        spriteDiv.innerHTML = "";
+        moveDiv.innerHTML = "";
+        dataDiv.innerHTML = "";
 
         //use the created tags to add output to the original HTML page
         tagP1.innerHTML = "Pokemon Name: " + name;
-        outDiv.appendChild(tagP1);
+        nameDiv.appendChild(tagP1);
 
-        outDiv.appendChild(tagBR);
+        //outDiv.appendChild(tagBR);
 
         tagP2.innerHTML = "Pokemon ID: " + id;
-        outDiv.appendChild(tagP2);
-
-        outDiv.appendChild(tagBR);
+        idDiv.appendChild(tagP2);
 
         tagP3.innerHTML = "Pokemon Type(s): " + types;
-        outDiv.appendChild(tagP3);
+        typeDiv.appendChild(tagP3);
 
-        outDiv.appendChild(tagBR);
+        //outDiv.appendChild(tagBR);
 
         tagImg.src = sprite;
-        outDiv.appendChild(tagImg);
+        spriteDiv.appendChild(tagImg);
 
-        outDiv.appendChild(tagBR);
+        //outDiv.appendChild(tagBR);
 
-        tagP5.innerHTML = "Height: " + height + " decimetres";
-        outDiv.appendChild(tagP5);
-
-        tagP6.innerHTML = "Weight: " + weight + " hectograms";
-        outDiv.appendChild(tagP6);
-
-        //add in the moves to output
         tagP4.innerHTML = "Moves: " + moves;
-        outDiv.appendChild(tagP4);
+        moveDiv.appendChild(tagP4);
 
+        tagP5.innerHTML = "Height: " + height + " decimetres | Weight: " + weight + " hectograms";
+        dataDiv.appendChild(tagP5);
     }
     )
     .catch(function (error) {
@@ -205,51 +206,53 @@ function getDefaultPokeData() {
             //write the data back to the original html page
 
             //create tags first
-            const tagP1 = document.createElement("p");
-            const tagP2 = document.createElement("p");
-            const tagP3 = document.createElement("p");
-            const tagP4 = document.createElement("p");
-            const tagP5 = document.createElement("p");
-            const tagP6 = document.createElement("p");
+            const tagP1 = document.createElement("p"); //name
+            const tagP2 = document.createElement("p"); //id
+            const tagP3 = document.createElement("p"); //type(s)
+            const tagP4 = document.createElement("p"); //moves
+            const tagP5 = document.createElement("p"); //info
+            const tagImg = document.createElement("img"); //sprite
 
-            const tagBR = document.createElement("br");
-            const tagImg = document.createElement("img");
+            //get every output div
+            var nameDiv = document.getElementById("outName");
+            var idDiv = document.getElementById("outID");
+            var typeDiv = document.getElementById("outType");
+            var spriteDiv = document.getElementById("outSprite");
+            var moveDiv = document.getElementById("outMoves");
+            var dataDiv = document.getElementById("outData")
 
-            var outDiv = document.getElementById("output");
-
-            //clear out the output div
-            outDiv.innerHTML = "";
+            //clear out the output divs
+            nameDiv.innerHTML = "";
+            idDiv.innerHTML = "";
+            typeDiv.innerHTML = "";
+            spriteDiv.innerHTML = "";
+            moveDiv.innerHTML = "";
+            dataDiv.innerHTML = "";
 
             //use the created tags to add output to the original HTML page
             tagP1.innerHTML = "Pokemon Name: " + name;
-            outDiv.appendChild(tagP1);
+            nameDiv.appendChild(tagP1);
 
-            outDiv.appendChild(tagBR);
+            //outDiv.appendChild(tagBR);
 
             tagP2.innerHTML = "Pokemon ID: " + id;
-            outDiv.appendChild(tagP2);
-
-            outDiv.appendChild(tagBR);
+            idDiv.appendChild(tagP2);
 
             tagP3.innerHTML = "Pokemon Type(s): " + types;
-            outDiv.appendChild(tagP3);
+            typeDiv.appendChild(tagP3);
 
-            outDiv.appendChild(tagBR);
+            //outDiv.appendChild(tagBR);
 
             tagImg.src = sprite;
-            outDiv.appendChild(tagImg);
+            spriteDiv.appendChild(tagImg);
 
-            outDiv.appendChild(tagBR);
-
-            tagP5.innerHTML = "Height: " + height + " decimetres";
-            outDiv.appendChild(tagP5);
-
-            tagP6.innerHTML = "Weight: " + weight + " hectograms";
-            outDiv.appendChild(tagP6);
+            //outDiv.appendChild(tagBR);
 
             tagP4.innerHTML = "Moves: " + moves;
-            outDiv.appendChild(tagP4);
+            moveDiv.appendChild(tagP4);
 
+            tagP5.innerHTML = "Height: " + height + " decimetres | Weight: " + weight + " hectograms";
+            dataDiv.appendChild(tagP5);
         }
         )
         .catch(function (error) {
