@@ -28,6 +28,15 @@ function getPokeData() {
         });
         types = types.join("/"); //if the pokemon has multiple typings, join with a "/"
 
+        //testing trying to pull move data
+        var moveData;
+        let moves = response.data.moves.map(pokeMoves => {
+            moveData = pokeMoves.move.name;
+            return moveData;
+        });
+        moves = moves.join(" / ");
+        alert(moves);
+
         var sprite = response.data.sprites.front_default; //link the to sprite image
         var height = response.data.height; //height of pokemon
         var weight = response.data.weight; //weight of pokemon
