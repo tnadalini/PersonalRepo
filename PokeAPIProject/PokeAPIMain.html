@@ -64,7 +64,7 @@
         <div id="form">
 
             <!--form for getting generation selection and desired pokemon from user-->
-            <form id="pokeform">
+            <form id="pokeform" name="pokeform">
                 <br>
 
                 <label for="gen">Please select a generation: </label>
@@ -95,7 +95,13 @@
                 function searchKeyPress(e) {
                     // look for window.event in case event isn't passed in
                     e = e || window.event;
+                    var input = document.forms["pokeform"]["pokemon"].value;
                     if (e.keyCode == 13) {
+                        if (input == "" || input == null) {
+                            getDefaultPokeData();
+                            return false;
+                        }
+                        //if input isn't blank, then the function will be called with the given input
                         document.getElementById('button').click();
                         return false;
                     }
