@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="PokeAPIFunctions.js"></script>
 
 </head>
@@ -78,25 +79,37 @@
                 </select>
                 <br>
                 <br>
-                <br>
                 <label for="pokemon">Enter your desired Pokemon below: </label>
                 <br>
-                <input type="text" id="pokemon" name="pokemon" size="35" placeholder="ex. 1 or bulbasaur">
+                <input type="text" id="pokemon" name="pokemon" size="35" placeholder="ex. 1 or bulbasaur"
+                              onkeypress = "return searchKeyPress(event);"   >
                 <br>
 
             </form>
         </div>
 
         <div id="buttons">
-            <input type="button" onclick="getPokeData()" value="Pokemon Search!">
+            <input type="button" id="button" onclick="getPokeData()" value="Pokemon Search!">
+
+            <script>
+                function searchKeyPress(e) {
+                    // look for window.event in case event isn't passed in
+                    e = e || window.event;
+                    if (e.keyCode == 13) {
+                        document.getElementById('button').click();
+                        return false;
+                    }
+                    return true;
+                }
+            </script>
             <!-- <a href="https://pokeapi.co/docs/v2" target="_blank">PokeAPIv2 Link</a>
 
-            <br>
+    <br>
 
-            <a href="PokeBattleSim.html" target="_blank">PokeMon Battle Simulator!</a> -->
+    <a href="PokeBattleSim.html" target="_blank">PokeMon Battle Simulator!</a> -->
         </div>
         <!--main output div for holding the output for pokemon data-->
-        <div id="outputDiv"class="output-container"> 
+        <div id="outputDiv" class="output-container">
             <div id="outName" class="output"></div>
             <div id="outID" class="output"></div>
             <div id="outType" class="output"></div>
@@ -106,5 +119,4 @@
         </div>
     </div>
 </body>
-
 </html>
