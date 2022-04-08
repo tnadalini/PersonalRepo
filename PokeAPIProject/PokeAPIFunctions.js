@@ -1,3 +1,5 @@
+var pokeData; //global variable for storing pokemon data
+
 function getPokeData() {
 
     //call helper method to get specified URL for API searching
@@ -15,6 +17,9 @@ function getPokeData() {
         }
     )
         .then(function (response) {
+            //reset the Data array
+            pokeData = null;
+
             var id = response.data.id; //ID number of the pokemon
 
             //if the pokemon ID is out of the limit range, exit early and alert the user of the error.
@@ -28,6 +33,7 @@ function getPokeData() {
                 return pokemon.type.name;
             });
             types = types.join("/"); //if the pokemon has multiple typings, join with a "/"
+
 
             //pull move data and output first 4 moves available 
             let moves = response.data.moves.map(pokeMoves => {
@@ -48,6 +54,16 @@ function getPokeData() {
             var sprite = response.data.sprites.front_default; //link the to sprite image
             var height = response.data.height; //height of pokemon
             var weight = response.data.weight; //weight of pokemon
+
+
+            pokeData = new Array(id, name, types, sprite, height, weight, moves);
+
+        }
+        )
+        .catch(function (error) {
+            console.log("Error during AXIOS call! Please try again later.");
+            alert("Error during AXIOS call! Please make sure you ensure your input was valid");
+        }).finally(function () {
 
             //write the data back to the original html page
 
@@ -76,34 +92,23 @@ function getPokeData() {
             dataDiv.innerHTML = "";
 
             //use the created tags to add output to the original HTML page
-            tagP1.innerHTML = "Pokemon Name: " + name;
+            tagP1.innerHTML = "Pokemon Name: " + pokeData[1];
             nameDiv.appendChild(tagP1);
 
-            //outDiv.appendChild(tagBR);
-
-            tagP2.innerHTML = "Pokemon ID: " + id;
+            tagP2.innerHTML = "Pokemon ID: " + pokeData[0];
             idDiv.appendChild(tagP2);
 
-            tagP3.innerHTML = "Pokemon Type(s): " + types;
+            tagP3.innerHTML = "Pokemon Type(s): " + pokeData[2];
             typeDiv.appendChild(tagP3);
 
-            //outDiv.appendChild(tagBR);
-
-            tagImg.src = sprite;
+            tagImg.src = pokeData[3];
             spriteDiv.appendChild(tagImg);
 
-            //outDiv.appendChild(tagBR);
-
-            tagP4.innerHTML = "Moves: " + moves;
+            tagP4.innerHTML = "Moves: " + pokeData[6];
             moveDiv.appendChild(tagP4);
 
-            tagP5.innerHTML = "Height: " + height + " decimetres | Weight: " + weight + " hectograms";
+            tagP5.innerHTML = "Height: " + pokeData[4] + " decimetres | Weight: " + pokeData[5] + " hectograms";
             dataDiv.appendChild(tagP5);
-        }
-        )
-        .catch(function (error) {
-            console.log("Error during AXIOS call! Please try again later.");
-            alert("Error during AXIOS call! Please make sure you ensure your input was valid");
         });
 
 } //end getPokeData
@@ -117,7 +122,6 @@ function setPokemonURL() {
 
     return url;
 } //end setPokemonURL
-
 
 
 //helper function for getPokeData; validates generation data from user
@@ -170,7 +174,10 @@ function getDefaultPokeData() {
             url: "https://pokeapi.co/api/v2/pokemon/pikachu/"
         }
     )
-        .then(function (response)  {
+        .then(function (response) {
+            //reset the Data array
+            pokeData = null;
+
             var id = response.data.id; //ID number of the pokemon
 
             var name = response.data.name; //name of the pokemon
@@ -194,11 +201,21 @@ function getDefaultPokeData() {
                     moves += moveList[i];
                 }
             }
-            //alert(moves);
 
             var sprite = response.data.sprites.front_default; //link the to sprite image
             var height = response.data.height; //height of pokemon
             var weight = response.data.weight; //weight of pokemon
+
+            pokeData = new Array(id, name, types, sprite, height, weight, moves);
+            
+        }
+        )
+        .catch(function (error) {
+            console.log("Error during AXIOS call! Please try again later.");
+            alert("Error during AXIOS call! Error occured during basic Pokemon data call!");
+        }).finally(function () {
+
+            //write the data back to the original html page
 
             //create tags first
             const tagP1 = document.createElement("p"); //name
@@ -225,29 +242,27 @@ function getDefaultPokeData() {
             dataDiv.innerHTML = "";
 
             //use the created tags to add output to the original HTML page
-            tagP1.innerHTML = "Pokemon Name: " + name;
+            tagP1.innerHTML = "Pokemon Name: " + pokeData[1];
             nameDiv.appendChild(tagP1);
 
-            tagP2.innerHTML = "Pokemon ID: " + id;
+            //outDiv.appendChild(tagBR);
+
+            tagP2.innerHTML = "Pokemon ID: " + pokeData[0];
             idDiv.appendChild(tagP2);
 
-            tagP3.innerHTML = "Pokemon Type(s): " + types;
+            tagP3.innerHTML = "Pokemon Type(s): " + pokeData[2];
             typeDiv.appendChild(tagP3);
 
-            tagImg.src = sprite;
+            tagImg.src = pokeData[3];
             spriteDiv.appendChild(tagImg);
 
-            tagP4.innerHTML = "Moves: " + moves;
+            tagP4.innerHTML = "Moves: " + pokeData[6];
             moveDiv.appendChild(tagP4);
 
-            tagP5.innerHTML = "Height: " + height + " decimetres | Weight: " + weight + " hectograms";
+            tagP5.innerHTML = "Height: " + pokeData[4] + " decimetres | Weight: " + pokeData[5] + " hectograms";
             dataDiv.appendChild(tagP5);
-            
-        }
-        )
-        .catch(function (error) {
-            console.log("Error during AXIOS call! Please try again later.");
-            alert("Error during AXIOS call! Please make sure you ensure your input was valid");
         });
 
 } //end getDefaultPokeData
+
+
